@@ -1,14 +1,34 @@
+import { useState } from "react"
+import ExpenseForm from "./components/ExpenseForm"
+import ExpenseList from "./components/ExpenseList"
+import Summary from "./components/Summary"
+
 function App() {
+
+  const [expenses, setExpenses] = useState([])
+
+  const addExpense = (expense) => {
+    setExpenses([...expenses, expense])
+  }
+
+  const deleteExpense = (id) => {
+    setExpenses(expenses.filter(exp => exp.id !== id))
+  }
+
   return (
     <div>
-      <h1>Hello LaunchCode</h1>
+      <h1>SpendSmart</h1>
+
+      <Summary expenses={expenses} />
+
+      <ExpenseForm addExpense={addExpense} />
+
+      <ExpenseList
+        expenses={expenses}
+        deleteExpense={deleteExpense}
+      />
     </div>
   )
-
-  const [expenses, setExpenses] = useState([
-  { id: 1, title: "Food", amount: 15 },
-  { id: 2, title: "Gas", amount: 40 }
-])
 }
 
 export default App
