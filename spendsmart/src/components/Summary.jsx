@@ -1,9 +1,7 @@
-const BUDGET = 1000
-
-function Summary({ expenses }) {
+function Summary({ expenses, budget }) {
   const total = expenses.reduce((sum, exp) => sum + exp.amount, 0)
-  const remaining = BUDGET - total
-  const pct = Math.min((total / BUDGET) * 100, 100)
+  const remaining = budget - total
+  const pct = Math.min((total / budget) * 100, 100)
   const fillClass = pct > 90 ? "progress-fill danger" : pct > 70 ? "progress-fill warn" : "progress-fill"
 
   return (
@@ -19,6 +17,10 @@ function Summary({ expenses }) {
             ${remaining.toFixed(2)}
           </span>
         </div>
+        <div className="summary-stat">
+          <span className="summary-label">Budget:</span>
+          <span className="summary-value">${Number(budget).toFixed(2)}</span>
+        </div>
       </div>
 
       <div className="progress-wrap">
@@ -26,7 +28,7 @@ function Summary({ expenses }) {
           <div className={fillClass} style={{ width: `${pct}%` }} />
         </div>
         <div className="progress-label">
-          <span>{pct.toFixed(0)}% of ${BUDGET} budget used</span>
+          <span>{pct.toFixed(0)}% of ${Number(budget).toFixed(2)} budget used</span>
         </div>
       </div>
     </div>

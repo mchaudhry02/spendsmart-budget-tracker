@@ -1,6 +1,6 @@
 import ExpenseItem from "./ExpenseItem"
 
-function ExpenseList({ expenses, deleteExpense }) {
+function ExpenseList({ expenses, deleteExpense, editExpense }) {
   return (
     <div className="list-section">
       <h3 className="section-title">Expense List</h3>
@@ -13,6 +13,7 @@ function ExpenseList({ expenses, deleteExpense }) {
               key={exp.id}
               expense={exp}
               deleteExpense={deleteExpense}
+              editExpense={editExpense}
             />
           ))}
         </ul>

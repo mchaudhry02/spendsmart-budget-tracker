@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ExpenseForm from "./components/ExpenseForm"
 import ExpenseList from "./components/ExpenseList"
 import Summary from "./components/Summary"
+import Chart from "./components/Chart"
+
 
 function About() {
   return (
@@ -76,8 +78,33 @@ function Contact() {
 }
 
 function App() {
-  const [expenses, setExpenses] = useState([])
+  // Load expenses from localStorage on first render
+  const [expenses, setExpenses] = useState(() => {
+    const saved = localStorage.getItem("spendsmart-expenses")
+    return saved ? JSON.parse(saved) : []
+  })
+
+  // Load budget from localStorage
+  const [budget, setBudget] = useState(() => {
+    const saved = localStorage.getItem("spendsmart-budget")
+    return saved ? Number(saved) : 1000
+  })
+
   const [page, setPage] = useState("Dashboard")
+  const [search, setSearch] = useState("")
+  const [filterCategory, setFilterCategory] = useState("All")
+  const [editingBudget, setEditingBudget] = useState(false)
+  const [budgetInput, setBudgetInput] = useState(budget)
+
+   // Save expenses to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("spendsmart-expenses", JSON.stringify(expenses))
+  }, [expenses])
+
+  // Save budget to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("spendsmart-budget", budget)
+  }, [budget])
 
   const addExpense = (expense) => {
     setExpenses([...expenses, expense])
@@ -86,6 +113,27 @@ function App() {
   const deleteExpense = (id) => {
     setExpenses(expenses.filter(exp => exp.id !== id))
   }
+
+   const editExpense = (updatedExpense) => {
+    setExpenses(expenses.map(exp => exp.id === updatedExpense.id ? updatedExpense : exp))
+  }
+
+   const saveBudget = () => {
+    const parsed = parseFloat(budgetInput)
+    if (!isNaN(parsed) && parsed > 0) {
+      setBudget(parsed)
+      localStorage.setItem("spendsmart-budget", parsed)
+    }
+    setEditingBudget(false)
+  }
+
+  // Get unique categories from expenses for filter dropdown
+  const usedCategories = ["All", ...new Set(expenses.map(exp => exp.category))]
+
+  // Filter and search expenses
+  const filteredExpenses = expenses
+    .filter(exp => filterCategory === "All" || exp.category === filterCategory)
+    .filter(exp => exp.title.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <div>
@@ -110,10 +158,56 @@ function App() {
       <div className="app-container">
         {page === "Dashboard" && (
           <>
-            <h1>SpendSmart</h1>
-            <Summary expenses={expenses} />
+            <div className="page-header">
+              <h1>SpendSmart</h1>
+              {editingBudget ? (
+                <div className="budget-edit">
+                  <input
+                    type="number"
+                    value={budgetInput}
+                    onChange={e => setBudgetInput(e.target.value)}
+                    className="budget-input"
+                  />
+                  <button onClick={saveBudget}>Save</button>
+                  <button className="btn-cancel" onClick={() => setEditingBudget(false)}>Cancel</button>
+                </div>
+              ) : (
+                <button className="btn-edit-budget" onClick={() => { setEditingBudget(true); setBudgetInput(budget) }}>
+                  Edit Budget
+                </button>
+              )}
+            </div>
+ 
+            <Summary expenses={expenses} budget={budget} />
+ 
+            <Chart expenses={expenses} />
+ 
             <ExpenseForm addExpense={addExpense} />
-            <ExpenseList expenses={expenses} deleteExpense={deleteExpense} />
+ 
+            {/* Search and Filter */}
+            <div className="search-filter">
+              <input
+                className="search-input"
+                placeholder="🔍 Search expenses..."
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+              <select
+                className="filter-select"
+                value={filterCategory}
+                onChange={e => setFilterCategory(e.target.value)}
+              >
+                {usedCategories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+ 
+            <ExpenseList
+              expenses={filteredExpenses}
+              deleteExpense={deleteExpense}
+              editExpense={editExpense}
+            />
           </>
         )}
         {page === "About" && <About />}
