@@ -23,6 +23,7 @@ a:hover {
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f4f6f9;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ctext x='10' y='40' font-size='22' fill='%232563eb' fill-opacity='0.20' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='80' y='90' font-size='16' fill='%232563eb' fill-opacity='0.05' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='150' y='55' font-size='28' fill='%232563eb' fill-opacity='0.06' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='40' y='140' font-size='20' fill='%232563eb' fill-opacity='0.07' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='120' y='170' font-size='14' fill='%232563eb' fill-opacity='0.05' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='170' y='130' font-size='24' fill='%232563eb' fill-opacity='0.06' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='60' y='190' font-size='18' fill='%232563eb' fill-opacity='0.05' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3C/svg%3E");
   margin: 0;
   padding: 0;
 }

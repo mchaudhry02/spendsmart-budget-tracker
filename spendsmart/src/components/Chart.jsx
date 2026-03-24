@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import spendSmartLogo from "../assets/spend_smart.jpg"
 
 const COLORS = [
   "#2563eb", "#16a34a", "#dc2626", "#f59e0b", "#8b5cf6",
@@ -126,6 +127,16 @@ function Chart({ expenses }) {
         <div className="chart-block" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <p className="chart-label">By Amount</p>
           <canvas ref={barRef} width={260} height={200} />
+        </div>
+        {/* Divider */}
+        <div className="chart-divider" />
+        {/* Logo Image */}
+        <div className="chart-block" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <img
+            src={spendSmartLogo}
+            alt="SpendSmart Logo"
+            style={{ width: 130, height: 130, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 12px rgba(37,99,235,0.18)" }}
+          />
         </div>
  
       </div>
