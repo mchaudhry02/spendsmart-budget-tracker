@@ -213,6 +213,9 @@ function App() {
         {page === "About" && <About />}
         {page === "Contact" && <Contact />}
       </div>
+      <footer className="footer">
+        <p>© {new Date().getFullYear()} SpendSmart. All rights reserved.</p>
+      </footer>
     </div>
   )
 }
