@@ -25,7 +25,9 @@ function ExpenseForm({ addExpense }) {
         return res.json()
       })
       .then((data) => {
-        const foodCategories = data.categories.map((cat) => cat.strCategory)
+        const foodCategories = data.categories
+          .map((cat) => cat.strCategory)
+          .filter((cat) => !cat.toLowerCase().includes("pork"))
         const allCategories = [...CUSTOM_CATEGORIES, ...foodCategories]
 
         setCategories(allCategories)
