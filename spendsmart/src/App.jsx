@@ -6,20 +6,47 @@ import Chart from "./components/Chart"
 
 
 function About() {
+  const features = [
+    { icon: "📊", title: "Visual Charts", desc: "Donut and bar charts show where your money goes at a glance." },
+    { icon: "➕", title: "Quick Add", desc: "Log expenses in seconds with name, amount, and category." },
+    { icon: "✏️", title: "Edit & Delete", desc: "Fix mistakes easily — update or remove any expense anytime." },
+    { icon: "💾", title: "Auto-Save", desc: "Your data is saved locally — it's still there when you come back." },
+    { icon: "🎯", title: "Budget Goals", desc: "Set a budget and track your progress with a live progress bar." },
+    { icon: "🔍", title: "Search & Filter", desc: "Find any expense instantly by name or category." },
+  ]
+
   return (
     <div className="about-card">
-      <h2>About</h2>
-      <p>
-        SpendSmart is a simple budget tracking web application designed to help users manage
-        their daily spending. It allows users to quickly add expenses, view a list of their
-        spending, and see their total expenses and remaining balance in one place.
+      <div className="about-hero">
+        <div className="about-logo-circle">💰</div>
+        <h2>SpendSmart</h2>
+        <p className="about-tagline">Your simple, smart budget companion.</p>
+      </div>
+
+      <p className="about-description">
+        SpendSmart helps students and young professionals take control of their finances —
+        no spreadsheets, no steep learning curve. Just clear, real-time insight into where
+        your money is going.
       </p>
-      <p>
-        SpendSmart is built with React and focuses on providing a clean and easy-to-use
-        interface so users can track their finances without complicated tools. The goal of the
-        app is to help students and young professionals become more aware of their spending
-        habits and make better budgeting decisions.
-      </p>
+
+      <div className="about-features">
+        {features.map(f => (
+          <div className="about-feature-card" key={f.title}>
+            <span className="about-feature-icon">{f.icon}</span>
+            <div>
+              <p className="about-feature-title">{f.title}</p>
+              <p className="about-feature-desc">{f.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="about-built-with">
+        <span>Built with</span>
+        <span className="about-badge">⚛️ React</span>
+        <span className="about-badge">💾 localStorage</span>
+        <span className="about-badge">🎨 Canvas API</span>
+      </div>
     </div>
   )
 }
@@ -90,7 +117,7 @@ function App() {
     return saved ? Number(saved) : 1000
   })
 
-  const [page, setPage] = useState("Dashboard")
+  const [page, setPage] = useState(() => localStorage.getItem("spendsmart-page") || "Dashboard")
   const [search, setSearch] = useState("")
   const [filterCategory, setFilterCategory] = useState("All")
   const [editingBudget, setEditingBudget] = useState(false)
@@ -105,6 +132,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("spendsmart-budget", budget)
   }, [budget])
+
+  useEffect(() => {
+  localStorage.setItem("spendsmart-page", page)
+  }, [page])
 
   const addExpense = (expense) => {
     setExpenses([...expenses, expense])
@@ -214,6 +245,7 @@ function App() {
         {page === "Contact" && <Contact />}
       </div>
       <footer className="footer">
+        <p className="footer-tagline">Spend less. Save more. Stay smart.</p>
         <p>© {new Date().getFullYear()} SpendSmart. All rights reserved.</p>
       </footer>
     </div>
