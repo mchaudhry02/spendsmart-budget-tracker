@@ -84,6 +84,7 @@ function Contact() {
           name="contact" 
           method="POST" 
           data-netlify="true"
+          action="/"
           className="contact-form"
         >
           <input type="hidden" name="form-name" value="contact" />
