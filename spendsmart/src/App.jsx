@@ -57,12 +57,31 @@ function Contact() {
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!name || !email || !message) return
+  const handleSubmit = async (e) => {
+  e.preventDefault()
+
+  if (!name || !email || !message) return
+
+  const formData = new FormData()
+  formData.append("form-name", "contact")
+  formData.append("name", name)
+  formData.append("email", email)
+  formData.append("message", message)
+
+  try {
+    await fetch("/", {
+      method: "POST",
+      body: formData,
+    })
+
     setSent(true)
-    setName(""); setEmail(""); setMessage("")
+    setName("")
+    setEmail("")
+    setMessage("")
+  } catch (error) {
+    console.error("Form error:", error)
   }
+}
 
   return (
     <div className="contact-card">
@@ -80,28 +99,47 @@ function Contact() {
       {sent ? (
         <p className="contact-sent">✓ Message sent! We'll get back to you soon.</p>
       ) : (
-        <form 
-          name="contact" 
-          method="POST" 
+        <form
+          name="contact"
+          method="POST"
           data-netlify="true"
-          action="/"
           className="contact-form"
+          onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact" />
 
           <div className="contact-field">
             <label>Name</label>
-            <input name="name" placeholder="Name" required />
+            <input
+              name="name"
+              placeholder="Name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
           </div>
 
           <div className="contact-field">
             <label>Email</label>
-            <input type="email" name="email" placeholder="Email" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <div className="contact-field">
             <label>Message</label>
-            <textarea name="message" placeholder="Send Message" required />
+            <textarea
+              name="message"
+              placeholder="Send Message"
+              value={message}
+              onChange={e => setMessage(e.target.value)}
+              required
+            />
           </div>
 
           <button type="submit" className="btn-send">Send</button>
