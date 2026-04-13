@@ -52,12 +52,13 @@ function About() {
 }
 
 function Contact() {
+  const [sent, setSent] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
-  const [sent, setSent] = useState(false)
 
-  const handleSend = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     if (!name || !email || !message) return
     setSent(true)
     setName(""); setEmail(""); setMessage("")
@@ -71,7 +72,7 @@ function Contact() {
         we would love to hear from you. You can reach us by email or by filling out the contact form below.
       </p>
       <p className="contact-email">
-        Email: <a href="mailto:support@spendsmart.com">support@spendsmart.com</a>
+        Email: <a href="mailto:qadimakhi@gmail.com">qadimakhi@gmail.com</a>
       </p>
 
       <p className="contact-form-title">Contact Form</p>
@@ -79,27 +80,37 @@ function Contact() {
       {sent ? (
         <p className="contact-sent">✓ Message sent! We'll get back to you soon.</p>
       ) : (
-        <div className="contact-form">
+        <form 
+          name="contact" 
+          method="POST" 
+          data-netlify="true"
+          className="contact-form"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+
           <div className="contact-field">
             <label>Name</label>
-            <input placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+            <input name="name" placeholder="Name" required />
           </div>
+
           <div className="contact-field">
             <label>Email</label>
-            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+            <input type="email" name="email" placeholder="Email" required />
           </div>
+
           <div className="contact-field">
             <label>Message</label>
-            <textarea placeholder="Send Message" value={message} onChange={e => setMessage(e.target.value)} />
+            <textarea name="message" placeholder="Send Message" required />
           </div>
-          <button className="btn-send" onClick={handleSend}>Send</button>
-        </div>
-      )}
 
-      <p className="contact-note">
-        Our team will review your message and respond as soon as possible. We appreciate your
-        feedback and are always looking for ways to improve SpendSmart.
-      </p>
+          <button type="submit" className="btn-send">Send</button>
+        </form>
+              )}
+
+              <p className="contact-note">
+                Our team will review your message and respond as soon as possible. We appreciate your
+                feedback and are always looking for ways to improve SpendSmart.
+              </p>
     </div>
   )
 }

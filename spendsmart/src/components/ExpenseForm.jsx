@@ -8,7 +8,7 @@ const CUSTOM_CATEGORIES = [
   "Utilities",
   "Rent",
   "Education",
-  "Other",
+  "Others"
 ]
 function ExpenseForm({ addExpense }) {
   const [title, setTitle] = useState("")
@@ -18,6 +18,7 @@ function ExpenseForm({ addExpense }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  //API
   useEffect(() => {
     fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
       .then((res) => {
