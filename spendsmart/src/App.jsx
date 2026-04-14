@@ -219,7 +219,7 @@ function App() {
   return (
     <div>
       <nav className="navbar">
-        <span className="navbar-brand">SpendSmart</span>
+        <span className="navbar-brand" onClick={() => setPage("Dashboard")} style={{ cursor: "pointer" }}>SpendSmart</span> 
         <div className="navbar-links">
           <button
             className={page === "Dashboard" ? "nav-btn active" : "nav-btn"}

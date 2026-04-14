@@ -3,7 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(5, 5, 5, 0.87);
   background-color: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -573,7 +572,7 @@ button:hover {
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
-  color: #1a1a2e;
+  color: #111827;
 }
 
 .about-card p {
@@ -582,6 +581,7 @@ button:hover {
   line-height: 1.75;
   margin-bottom: 14px;
 }
+
 
 /* ── CONTACT ── */
 .contact-card {
@@ -597,12 +597,12 @@ button:hover {
   font-weight: 700;
   text-align: center;
   margin-bottom: 10px;
-  color: #1a1a2e;
+  color: #111827;
 }
 
 .contact-intro {
   font-size: 0.88rem;
-  color: #4b5563;
+  color: #374151;
   text-align: center;
   line-height: 1.65;
   margin-bottom: 6px;
@@ -618,7 +618,7 @@ button:hover {
 .contact-form-title {
   font-weight: 700;
   font-size: 0.95rem;
-  color: #1a1a2e;
+  color: #111827;
   margin-bottom: 14px;
 }
 
@@ -637,7 +637,7 @@ button:hover {
 .contact-field label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #6b7280;
+  color: #374151;
 }
 
 .contact-field input {
@@ -762,7 +762,7 @@ button:hover {
 
 .about-tagline {
   font-size: 1rem;
-  color: #2563eb;
+  color: #1d4ed8;
   font-weight: 500;
   text-align: center;
   margin: 0;
@@ -770,7 +770,7 @@ button:hover {
 
 .about-description {
   font-size: 0.92rem;
-  color: #4b5563;
+  color: #374151;
   line-height: 1.75;
   text-align: center;
   max-width: 560px;
@@ -802,13 +802,13 @@ button:hover {
 .about-feature-title {
   font-weight: 600;
   font-size: 0.88rem;
-  color: #1a1a2e;
+  color: #111827;
   margin: 0 0 3px 0;
 }
 
 .about-feature-desc {
   font-size: 0.82rem;
-  color: #6b7280;
+  color: #4b5563;
   line-height: 1.5;
   margin: 0;
 }
@@ -831,4 +831,126 @@ button:hover {
   font-size: 0.8rem;
   color: #374151;
   font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #0f172a;
+    color: rgba(240, 240, 240, 0.87);
+  }
+
+  body {
+    background-color: #0f172a;
+  }
+
+  /* Cards & sections */
+  .summary-card,
+  .form-section,
+  .chart-card,
+  .list-section,
+  .about-card,
+  .contact-card,
+  .navbar,
+  .footer {
+    background: #1e293b;  
+  background: #243450;  
+  border-color: #4a6080;
+  }
+
+  /* Inputs & selects */
+  input,
+  .category-select,
+  .search-input,
+  .filter-select,
+  .budget-input,
+  .edit-input,
+  .contact-field textarea {
+    background: #0f172a;
+    border-color: #475569;
+    color: #e2e8f0;
+  }
+
+  input::placeholder,
+  .search-input::placeholder,
+  .contact-field textarea::placeholder {
+    color: #64748b;
+  }
+
+  input:focus,
+  .search-input:focus,
+  .contact-field textarea:focus {
+    background: #1e293b;
+    border-color: #3b82f6;
+  }
+
+  /* Text */
+  h1, h2, h3 { color: #ffffff; }
+  .section-title { color: #64748b; }
+  .summary-value { color: #f1f5f9; }
+  .expense-name { color: #e2e8f0; }
+  .legend-label { color: #cbd5e1; }
+  .legend-amount { color: #f1f5f9; }
+
+  /* Expense items */
+  .expense-item {
+    background: #0f172a;
+    border-color: #334155;
+  }
+
+  .expense-category {
+    background: #334155;
+    color: #cbd5e1;
+  }
+
+  /* Buttons */
+  .btn-edit {
+    background: #1e3a5f;
+    color: #93c5fd;
+  }
+
+  .btn-cancel,
+  .btn-cancel-sm {
+    background: #334155;
+    color: #e2e8f0;
+  }
+
+  .btn-cancel:hover,
+  .btn-cancel-sm:hover {
+    background: #475569;
+  }
+
+  /* About feature cards */
+  .about-feature-card {
+    background: #1a2e4a;
+    border-color: #4a6080;
+  }
+
+  .about-badge {
+    background: #1e3a5f;
+    border-color: #4a6080;
+    color: #e2e8f0;
+  }
+
+  /* Progress track */
+  .progress-track { background: #334155; }
+
+  /* Chart legend donut center */
+  canvas { color-scheme: dark; }
+
+/* About text */
+  .about-card h2, .about-hero h2 { color: #ffffff !important; }
+  .about-tagline { color: #60a5fa !important; }
+  .about-description { color: #cbd5e1 !important; }
+  .about-feature-title { color: #f1f5f9 !important; }
+  .about-feature-desc { color: #94a3b8 !important; }
+  .about-built-with { color: #cbd5e1 !important; }
+  .about-badge { color: #e2e8f0 !important; }
+
+  /* Contact text */
+  .contact-card h2 { color: #ffffff !important; }
+  .contact-intro { color: #cbd5e1 !important; }
+  .contact-email { color: #cbd5e1 !important; }
+  .contact-form-title { color: #f1f5f9 !important; }
+  .contact-field label { color: #94a3b8 !important; }
+  .contact-note { color: #94a3b8 !important; }
 }
